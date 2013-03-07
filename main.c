@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include <time.h>
 //#include <gsl/gsl_linalg.h>
+
+#include "givens.h"
 
 int main(int argc, char **argv)
 {
@@ -11,7 +12,7 @@ int main(int argc, char **argv)
 	char *file_name;
 	
 	int matrix_num, matrix_col, matrix_row, matrix_size;
-	double *data_in, *data_buff, *data_out;
+	double *data_in, *data_in_buff, *data_out_buff, *data_out;
 		
 	FILE *file;
 	
@@ -44,7 +45,8 @@ int main(int argc, char **argv)
 		
 		matrix_size = matrix_row * matrix_col;
 		data_in = (double *)malloc(matrix_size * matrix_num * sizeof(double));
-		data_buff = (double *)malloc(matrix_size * sizeof(double));  // unit matrix size            
+		data_in_buff = (double *)malloc(matrix_size * sizeof(double));  // unit matrix size            
+		data_out_buff = (double *)malloc(matrix_size * sizeof(double));
 		data_out = (double *)malloc(matrix_size * matrix_num * sizeof(double));		
 
 		N = matrix_num * matrix_size;
@@ -61,17 +63,16 @@ int main(int argc, char **argv)
 		// start computing
 		start = clock();
 		for (k = 0; k < matrix_num; k++){
-			/*for (j = 0; j < matrix_size; j++){
-				data_buff[j] = data_in[j+k*matrix_size];
+			for (j = 0; j < matrix_size; j++){
+				data_in_buff[j] = data_in[j+k*matrix_size];
 			}
-			
+
 			// gsl library based method
 			
 			// Givens Rotation algorithm
-			givens_rotation(data_buff);
-			*/
+			givens_rotation(data_in_buff);	
 		
-			data_out = data_in;
+			//data_out = data_in;
 		}
 		end = clock();
 		printf("done in %lf second\n", (double)((end-start)/CLOCKS_PER_SEC));
@@ -92,8 +93,9 @@ int main(int argc, char **argv)
 
 		printf("freeing mem...\n");
 		free(data_in);
-		free(data_buff);
-		//free(data_out);
+		free(data_in_buff);
+		free(data_out_buff);
+		free(data_out);
 		printf("done.\n");
 	}
 	

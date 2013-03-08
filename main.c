@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	}
 	
 	for(i = 1; i < argc; i++){
-		int j, k;
+		int j, k, iter;
 		// load input file
 		file_name = argv[i];
 
@@ -66,19 +66,12 @@ int main(int argc, char **argv)
 		
 		// start computing
 		start = clock();
+		for(iter = 0; iter < 500; iter++){
 		for (k = 0; k < matrix_num; k++){
 			// load matrix stream into buffer
 			for (j = 0; j < matrix_size; j++){
 				data_in_buff[j] = data_in[j+k*matrix_size];
 			}
-			
-			/* testing point */
-			/*if (k == 1){
-			for(j=0; j<matrix_size;j++){
-				printf("input data buffer is %lf\n", data_in_buff[j]);
-			}
-			}*/
-			/* testing point */
 
 			// gsl library based method
 			
@@ -98,6 +91,7 @@ int main(int argc, char **argv)
 				data_out[j+k*matrix_size] = data_out_buff[j];
 			}
 			
+		}
 		}
 		end = clock();
 		//printf("start time %lf \n", start);

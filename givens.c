@@ -1,10 +1,15 @@
+/* debugging purpose */
+#include <stdio.h>
+/* debugging purpose */
+
 #include "givens.h"
 
 // Givens Rotation algorithm
-void givens_rotation(double *data_in, double *data_out, int matrix_col, int matrix_row){
+void givens_rotation(double *data_in, double *data_out){
+	
 	int i, j, interval;
 	double a1, a2;
-	boundcell rotator;
+	struct boundcell rotator;
 	double *data_in_start, *data_out_start;
 	
 	// i: column index, j: row index
@@ -14,9 +19,15 @@ void givens_rotation(double *data_in, double *data_out, int matrix_col, int matr
 			a1 = data_in[i + (j-2)*matrix_col];
 			a2 = data_in[i + (j-1)*matrix_col];
 			// set breakpoint for debugging purpose, check a1, a2 value
-
-			rotate(a1, a2, rotator); // rotate operation
+			
+			rotator = rotate(a1, a2); // rotate operation
 			// set breakpoint, check rotator.c rotator.s value
+			
+			/* testing point */
+			//if ((i == 0) && (j == 4)){
+			//printf("c value is %lf,\ts value is %lf\n", rotator.c, rotator.s);	
+			//}
+			/* testing point */
 			
 			data_in_start = data_in + i + (j-2)*matrix_col;
 			data_out_start = data_out + i +(j-2)*matrix_col;
@@ -32,9 +43,11 @@ void givens_rotation(double *data_in, double *data_out, int matrix_col, int matr
 }
 
 //semih's matlab version
-void rotate(double a1, double a2, boundcell rotator){
+struct boundcell rotate(double a1, double a2){
 	double cotangent, tangent;
-	if (a2 == 0){
+	struct boundcell rotator;
+
+	if (a2 == 0.0){
 		rotator.c = 1.0;
 		rotator.s = 0.0;
 	}
@@ -42,19 +55,22 @@ void rotate(double a1, double a2, boundcell rotator){
 	{
 		if (fabs(a2) >= fabs(a1)){
 			cotangent = a1/a2;
-			rotator.s = 1/sqrt(1+pow(cotangent, 2.0));
+			rotator.s = 1.0/sqrt(1.0+pow(cotangent, 2.0));
 			rotator.c = rotator.s * cotangent;
+			//printf("c is %lf,\ts is %lf\n", rotator.c, rotator.s);
 		}
 		else
 		{
 			tangent = a2/a1;
-			rotator.c = 1/sqrt(1+pow(tangent, 2.0));
+			rotator.c = 1.0/sqrt(1.0+pow(tangent, 2.0));
 			rotator.s = rotator.c * tangent;
+			//printf("c is %lf,\ts is %lf\n", rotator.c, rotator.s);
 		}
 	}
+	return rotator;
 }
 
-void matrix_trans(boundcell rotator, double *data_in, double *data_out, int interval)
+void matrix_trans(struct boundcell rotator, double *data_in, double *data_out, int interval){
 	int j;
 	for(j = 0; j < interval; j++){
 		data_out[j] = rotator.c * data_in[j] + rotator.s * data_in[j+matrix_col];

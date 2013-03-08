@@ -3,7 +3,7 @@ clc
 
 IntegerBit=1;
 FractionBit=14;
-TestVectorNum=50;
+TestVectorNum=10000;
 MatrixRow=4;
 MatrixCol=4;
 

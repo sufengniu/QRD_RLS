@@ -78,14 +78,6 @@ int main(int argc, char **argv)
 			// Givens Rotation algorithm
 			givens_rotation(data_in_buff, data_out_buff);	
 			
-			/* testing point */
-			//if (k == 1){
-                        //for(j=0; j<matrix_size;j++){
-                        //        printf("out data buffer is %lf\n", data_out_buff[j]);
-                       // }
-                        //}
-			/* testing point */
-			
 			// output to data_out mem space
 			for(j = 0; j < matrix_size; j++){
 				data_out[j+k*matrix_size] = data_out_buff[j];
@@ -94,8 +86,7 @@ int main(int argc, char **argv)
 		}
 		}
 		end = clock();
-		//printf("start time %lf \n", start);
-		//printf("end time %lf \n", end);
+
 		printf("done in %lf second\n", ((double)(end-start))/CLOCKS_PER_SEC);
 		
 		// writing result to an output file

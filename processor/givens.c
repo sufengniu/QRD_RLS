@@ -11,14 +11,15 @@ void givens_rotation(double *data_in, double *data_out){
 	// i: column index, j: row index
 	for(i = 0; i < matrix_col; i++){
 		for(j = matrix_row; j > i+1; j--){
+			int k;
 			
 			a1 = data_in[i + (j-2)*matrix_col];
 			a2 = data_in[i + (j-1)*matrix_col];
 			// set breakpoint for debugging purpose, check a1, a2 value
-			
+
 			rotator = rotate(a1, a2); // rotate operation
 			// set breakpoint, check rotator.c rotator.s value
-						
+	
 			data_in_start = data_in + i + (j-2)*matrix_col;
 			data_out_start = data_out + i +(j-2)*matrix_col;
 			
@@ -27,7 +28,15 @@ void givens_rotation(double *data_in, double *data_out){
 			matrix_trans(rotator, data_in_start, data_out_start, interval);
 			// set breakpoint, verify data_in and data_out
 			
+			for(k = 0; k < interval; k++){
+				data_in_start[k] = data_out_start[k];
+				data_in_start[k+matrix_col] = data_out_start[k+matrix_col];
+			}
 		}
+	}
+	
+	for(i = 0; i < matrix_col * matrix_row; i++){
+		data_out[i] = data_in[i];
 	}
 }
 
@@ -42,6 +51,7 @@ struct boundcell rotate(double a1, double a2){
 	}
 	else
 	{
+		
 		if (fabs(a2) >= fabs(a1)){
 			cotangent = a1/a2;
 			rotator.s = 1.0/sqrt(1.0+pow(cotangent, 2.0));
@@ -62,8 +72,7 @@ void matrix_trans(struct boundcell rotator, double *data_in, double *data_out, i
 	for(j = 0; j < interval; j++){
 		data_out[j] = rotator.c * data_in[j] + rotator.s * data_in[j+matrix_col];
 		data_out[j+matrix_col] = rotator.c * data_in[j+matrix_col] - rotator.s * data_in[j];
-	}	
-	
+	}		
 }
 
 

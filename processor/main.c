@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		file_name = argv[i];
 
 		printf("Data file: %s\n", file_name);
-		printf("\tReading input data file...\n");
+		printf("Reading input data file...\n");
 		file = fopen(file_name, "r");
 		if(file == NULL)
 		{
@@ -59,20 +59,20 @@ int main(int argc, char **argv)
 			if(fscanf(file, "%lf", data_in + k) == EOF)
 				break;
 		}
-
+		
 		printf("data reading done\n");
 		fclose(file);
 		printf("\tComputing QR decomposition...\n");
 		
 		// start computing
 		start = clock();
-		for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
+		//for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
 		for (k = 0; k < matrix_num; k++){
 			// load matrix stream into buffer
 			for (j = 0; j < matrix_size; j++){
 				data_in_buff[j] = data_in[j+k*matrix_size];
 			}
-
+			
 			// gsl library based method
 			
 			// Givens Rotation algorithm
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 			}
 			
 		}
-		}
+		//}
 		end = clock();
 
 		printf("done in %lf second\n", ((double)(end-start))/CLOCKS_PER_SEC);
@@ -94,13 +94,13 @@ int main(int argc, char **argv)
 		file = fopen("res_vector.dat", "w");
 		
 		fprintf(file, "%d\n", N);
+		fprintf(file, "%d\n", matrix_col);
+		fprintf(file, "%d\n", matrix_row);
 		
 		for(k = 0; k < N; k++){
-			if ((k+1)%matrix_col == 0)
-				fprintf(file, "%lf\n", *(data_out + k));
-			else
-				fprintf(file, "%lf\t", *(data_out + k));
-		}		
+			fprintf(file, "%lf\n", *(data_out + k));
+		}
+				
 		fclose(file);
 
 		printf("freeing mem...\n");

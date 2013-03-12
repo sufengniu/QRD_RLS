@@ -1,3 +1,11 @@
-This is QR decomposition RLS algorithm implementation based on ASIC, FPGA prototype and cuda GPU acceleration methods.
+This is QR decomposition RLS algorithm implementation based on ASIC, FPGA prototype, Zynq, CPU and cuda GPU acceleration.
 
+The code will cover serveral applications: Adaptive Beamformer, RLS algorithm, System Identification, etc.
 
+In the Matlab folder:
+	data_gen.m: used to generate test vector file
+	data_acq.m: to import the testbench results back to Matlab
+	err_check.m: call data_acq.m to check the error margin between embedded platform and Matlab
+
+In the processor folder:
+	makefile: support Zynq and x86 compiler, Zynq platform library link is required

@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 		
 		// start computing
 		start = clock();
-		//for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
+		for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
 		for (k = 0; k < matrix_num; k++){
 			// load matrix stream into buffer
 			for (j = 0; j < matrix_size; j++){
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 			}
 			
 		}
-		//}
+		}
 		end = clock();
 
 		printf("done in %lf second\n", ((double)(end-start))/CLOCKS_PER_SEC);

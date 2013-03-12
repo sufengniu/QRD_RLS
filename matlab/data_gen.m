@@ -22,10 +22,15 @@ end
 
 fid=fopen('test_vector.dat','a+');
 fprintf(fid, '%d\n', TestVectorNum);
-fprintf(fid, '%d\t%d\t\n', MatrixCol, MatrixRow);
+fprintf(fid, '%d\n', MatrixCol);
+fprintf(fid, '%d\n', MatrixRow);
 
 for i=1:TestVectorNum
-    fprintf(fid, '%f\t%f\t%f\t%f\n', A(:,:,i));
+	for j = 1:MatrixRow
+		for k = 1:MatrixCol
+    			fprintf(fid, '%f\n', A(j,k,i));
+		end
+	end
 end
 
 fclose(fid);

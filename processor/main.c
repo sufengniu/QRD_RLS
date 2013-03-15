@@ -6,10 +6,15 @@
 
 #include "givens.h"
 
+#define	BILLION	1000000000L;
+
 int main(int argc, char **argv)
 {
 	int i, N;
-	clock_t start, end;
+	// clock_t start, end;
+	struct timespec start, stop;
+	double accum;
+	
 	char *file_name;
 	
 	int matrix_num, matrix_size;
@@ -65,8 +70,10 @@ int main(int argc, char **argv)
 		printf("\tComputing QR decomposition...\n");
 		
 		// start computing
-		start = clock();
-		for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
+		//start = clock();
+		clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+				
+		// for(iter = 0; iter < 500; iter++){  // add more iterations to improve time mesasurements
 		for (k = 0; k < matrix_num; k++){
 			// load matrix stream into buffer
 			for (j = 0; j < matrix_size; j++){
@@ -84,11 +91,14 @@ int main(int argc, char **argv)
 			}
 			
 		}
-		}
-		end = clock();
-
-		printf("done in %lf second\n", ((double)(end-start))/CLOCKS_PER_SEC);
-		
+		//}
+		// end = clock();
+		clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
+				
+		// printf("done in %lf second\n", ((double)(end-start))/CLOCKS_PER_SEC);
+		accum = (stop.tv_sec - start.tv_sec)+(double)(stop.tv_nsec-start.tv_nsec)/(double)BILLION;
+		printf("done in %lf second\n", accum);
+				
 		// writing result to an output file
 		printf("writing results in res_vector.dat\n", file_name);
 		file = fopen("res_vector.dat", "w");

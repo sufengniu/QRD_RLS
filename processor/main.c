@@ -1,7 +1,5 @@
-/*
-Engineer: Sufeng Niu <sufengniu@gmail.com>
-License: GPLv3
-*/
+// Engineer: Sufeng Niu <sufengniu@gmail.com>
+// License: GPLv3
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -34,3 +34,5 @@ for i=1:TestVectorNum
 	[Q(:,:,i), R(:,:,i)]=qr(A(:,:,i));
 end
 
+
+

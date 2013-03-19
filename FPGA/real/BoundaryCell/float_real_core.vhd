@@ -65,25 +65,25 @@ end float_real_core;
 
 architecture Structure of float_real_core is
 
---signal data_in_buff : ;
---signal data_out_buff : ;
+signal data_in_buff : ;
+signal data_out_buff : ;
 
 begin
 
---process(clk, rst)
---begin
---	if rst = '1' then
---		data_in_buff	<= (others => '0');
---		data_out			<= (others => '0');
---	elsif rising_edge(clk) then
---		if ce = '1' then
---			if data_in_valid = '1' then
---				data_in_buff <= to_float(data_in);
---			end if;
---			data_out <= to_slv(data_out_buff);
---		end if;
---	end if;
---end process;
+process(clk, rst)
+begin
+	if rst = '1' then
+		data_in_buff	<= (others => '0');
+		data_out			<= (others => '0');
+	elsif rising_edge(clk) then
+		if ce = '1' then
+			if data_in_valid = '1' then
+				data_in_buff <= to_float(data_in);
+			end if;
+			data_out <= to_slv(data_out_buff);
+		end if;
+	end if;
+end process;
 
 end Structure;
 

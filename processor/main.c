@@ -1,3 +1,8 @@
+/*
+Engineer: Sufeng Niu <sufengniu@gmail.com>
+License: GPLv3
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,6 +10,7 @@
 //#include <gsl/gsl_linalg.h>
 
 #include "givens.h"
+#include "backsub.h"
 
 #define	BILLION	1000000000L;
 
@@ -85,6 +91,7 @@ int main(int argc, char **argv)
 			// Givens Rotation algorithm
 			givens_rotation(data_in_buff, data_out_buff);	
 			
+			// back_sub();
 			// output to data_out mem space
 			for(j = 0; j < matrix_size; j++){
 				data_out[j+k*matrix_size] = data_out_buff[j];

@@ -68,7 +68,7 @@ architecture Structure of fixed_real_core is
 signal data_in_buff, data_out_buff	: sfixed (DATA_INT downto -DATA_FRA);
 signal data_in_sq	: sfixed(sfixed_high(data_in_buff, '*', data_in_buff) 
 								downto sfixed_low(data_in_buff, '*', data_in_buff));
-signal r_sqr, r_sqr_buff	: sfixed( downto );
+signal r_sq, r_sq_buff	: sfixed( downto );
 
 constant lamda : sfixed(LAMDA_INT downto -LAMDA_FRA) := lamda_fixed(lamda);
 
@@ -94,13 +94,26 @@ process(clk, rst)
 begin
 	if rst = '1' then
 		data_in_sq	<= (others => '0');
-		r_sqr			<= (others => '0');
+		r_sq			<= (others => '0');
 		r_sqr_buff	<= (others => '0');
 	elsif rising_edge(clk) then
 		if ce = '1' then
 			data_in_sq	<= data_in_buff * data_in_buff;
 			r_sq			<= data_in_sq + lamda*r_sq_buff;
 			r_sq_buff	<= trounding(r_sq, , );
+			
+		end if;
+	end if;
+end process;
+
+-- square root approximation
+process(clk, rst)
+begin
+	if rst = '1' then
+		
+	elsif rising_edge(clk) then
+		if ce = '1' then
+			
 		end if;
 	end if;
 end process;

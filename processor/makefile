@@ -1,6 +1,7 @@
 # Makefile for QR Decomposition
-# author: Sufeng Niu
+# Engineer: Sufeng Niu
 # company: ECASP
+
 ZYNQ_PATH = /tools/Xilinx/14.4/ISE_DS/EDK/gnu/arm/lin/bin/
 BUILDROOT_PATH=$(HOME)/ZynqLinux/buildroot/
 

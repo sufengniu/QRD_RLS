@@ -15,6 +15,7 @@
 int main(int argc, char **argv)
 {
 	int i, N;
+	
 	// clock_t start, end;
 	struct timespec start, stop;
 	double accum;

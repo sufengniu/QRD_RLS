@@ -27,11 +27,6 @@ package QRD_RLS_pkg is
 	constant DATA_FRA					: integer := 13;				-- input width fractional part
 	constant WIDTH_DATA_FIXED				: integer := DATA_INT + DATA_FRA + 1;
 		
-	-- floating point
-	constant DATA_EXP					: integer := 8;				-- floating point exp
-	constant DATA_FPF					: integer := 23;				-- floating point fractinoal (FPF)
-	constant WIDTH_DATA_FLOAT		: integer := DATA_FPF + DATA_EXP + 1;
-	
 	constant COS_INT					: integer := 1;				-- cosine width integer part
 	constant COS_FRA					: integer := 14;				-- cosine width fractional part
 	constant WIDTH_COS_FIXED		: integer := COS_INT + COS_FRA + 1;
@@ -45,6 +40,11 @@ package QRD_RLS_pkg is
 	constant SIN_EXP					: integer := 8;				-- cosine
 	constant SIN_FPF					: integer := 23;				-- cosine
 	constant WIDTH_SIN_FLOAT		: integer := SIN_EXP + SIN_FPF + 1;
+	
+	-- floating point
+	constant DATA_EXP					: integer := 8;				-- floating point exp
+	constant DATA_FPF					: integer := 23;				-- floating point fractinoal (FPF)
+	constant WIDTH_DATA_FLOAT		: integer := DATA_FPF + DATA_EXP + 1;
 	
 	constant lamda						: real := 0.98;
 	constant LAMDA_INT				: integer := 1;				-- lamda integer part width

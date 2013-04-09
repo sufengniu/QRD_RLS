@@ -79,7 +79,7 @@ process(clk, rst)
 begin
 	if rst = '1' then
 		data_in_buff	<= (others => '0');
-		data_out		<= (others => '0');
+		data_out			<= (others => '0');
 	elsif rising_edge(clk) then
 		if ce = '1' then
 			if data_in_valid = '1' then

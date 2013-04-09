@@ -52,20 +52,21 @@ entity float_real_core is
 			ce 					: in  STD_LOGIC;
 			
 			data_in_rdy			: out STD_LOGIC;
-			data_in				: in  float (DATA_EXP downto -DATA_FPF);
+			data_in				: in  float (WIDTH_FLOAT-1 downto 0);
 			data_in_valid		: in  STD_LOGIC;
           
 			cos_valid 			: out STD_LOGIC;
-			cos 					: out float (COS_EXP downto -COS_FPF);
+			cos 					: out float (WIDTH_COS-1 downto 0);
 			sin_valid 			: out STD_LOGIC;
-			sin 					: out float (SIN_EXP downto -SIN_FPF);
+			sin 					: out float (WIDTH_SIN-1 downto 0);
 			data_out_valid		: out STD_LOGIC;
-			data_out				: out float (DATA_EXP downto -DATA_FPF));
+			data_out				: out float (WIDTH_FLOAT-1 downto 0));
 end float_real_core;
 
 architecture Structure of float_real_core is
 
-signal data_in_buff, data_out_buff : float(DATA_EXP downto -DATA_FPF);
+signal data_in_buff : ;
+signal data_out_buff : ;
 
 begin
 
@@ -77,7 +78,7 @@ begin
 	elsif rising_edge(clk) then
 		if ce = '1' then
 			if data_in_valid = '1' then
-				data_in_buff <= data_in;
+				data_in_buff <= to_float(data_in);
 			end if;
 			data_out <= to_slv(data_out_buff);
 		end if;

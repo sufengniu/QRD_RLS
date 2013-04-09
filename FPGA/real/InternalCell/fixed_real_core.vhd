@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    21:20:14 11/10/2012 
 -- Design Name: 
--- Module Name:    float_real_core - Behavioral 
+-- Module Name:    fixed_real_core - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -38,7 +38,7 @@ use IEEE_PROPOSED.float_pkg.all;
 library work;
 use work.QRD_RLS_pkg.all;
 
-entity float_real_core is
+entity fixed_real_core is
     Generic (	
 			mode					: string := "streaming";		-- streaming/burst: streaming data need more area and power.
 																			-- consumption
@@ -46,40 +46,74 @@ entity float_real_core is
 																			-- throughput oriented will provide high speed clock rate
 																			-- latency oriented will provide low circuit latency
 																			-- low performance: power saving, slow speed and small area.
-	Port ( 
+	Port ( 	
 			clk 					: in  STD_LOGIC;
 			rst 					: in  STD_LOGIC;
 			ce 					: in  STD_LOGIC;
-			
+
 			data_in_rdy			: out STD_LOGIC;
-			data_in				: in  float (DATA_EXP downto -DATA_FPF);
+			data_in				: in  sfixed (DATA_INT downto -DATA_FRA);
 			data_in_valid		: in  STD_LOGIC;
           
 			cos_valid 			: out STD_LOGIC;
-			cos 					: out float (COS_EXP downto -COS_FPF);
+			cos 					: out sfixed (COS_INT downto -COS_FRA);
 			sin_valid 			: out STD_LOGIC;
-			sin 					: out float (SIN_EXP downto -SIN_FPF);
+			sin 					: out sfixed (SIN_INT downto -SIN_FRA);
 			data_out_valid		: out STD_LOGIC;
-			data_out				: out float (DATA_EXP downto -DATA_FPF));
-end float_real_core;
+			data_out				: out sfixed (DATA_INT downto -DATA_FRA));
+end fixed_real_core;
 
-architecture Structure of float_real_core is
+architecture Structure of fixed_real_core is
 
-signal data_in_buff, data_out_buff : float(DATA_EXP downto -DATA_FPF);
+signal data_in_buff, data_out_buff	: sfixed (DATA_INT downto -DATA_FRA);
+signal data_in_sq	: sfixed(sfixed_high(data_in_buff, '*', data_in_buff) 
+								downto sfixed_low(data_in_buff, '*', data_in_buff));
+signal r_sq, r_sq_buff	: sfixed( downto );
+
+constant lamda : sfixed(LAMDA_INT downto -LAMDA_FRA) := lamda_fixed(lamda);
 
 begin
 
+-- input/output buffer
 process(clk, rst)
 begin
 	if rst = '1' then
 		data_in_buff	<= (others => '0');
-		data_out			<= (others => '0');
+		data_out		<= (others => '0');
 	elsif rising_edge(clk) then
 		if ce = '1' then
 			if data_in_valid = '1' then
 				data_in_buff <= data_in;
 			end if;
-			data_out <= to_slv(data_out_buff);
+			data_out <= data_out_buff;
+		end if;
+	end if;
+end process;
+
+process(clk, rst)
+begin
+	if rst = '1' then
+		data_in_sq	<= (others => '0');
+		r_sq			<= (others => '0');
+		r_sqr_buff	<= (others => '0');
+	elsif rising_edge(clk) then
+		if ce = '1' then
+			data_in_sq	<= data_in_buff * data_in_buff;
+			r_sq			<= data_in_sq + lamda*r_sq_buff;
+			r_sq_buff	<= trounding(r_sq, , );
+			
+		end if;
+	end if;
+end process;
+
+-- square root approximation
+process(clk, rst)
+begin
+	if rst = '1' then
+		
+	elsif rising_edge(clk) then
+		if ce = '1' then
+			
 		end if;
 	end if;
 end process;

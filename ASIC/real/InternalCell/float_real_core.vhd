@@ -51,21 +51,22 @@ entity float_real_core is
 			rst 					: in  STD_LOGIC;
 			ce 					: in  STD_LOGIC;
 			
-			data_in_rdy			: out STD_LOGIC;
-			data_in				: in  float (DATA_EXP downto -DATA_FPF);
-			data_in_valid		: in  STD_LOGIC;
+			data_in_rdy				: out STD_LOGIC;
+			data_in					: in  STD_LOGIC_VECTOR (WIDTH_FLOAT-1 downto 0);
+			data_in_valid				: in  STD_LOGIC;
           
-			cos_valid 			: out STD_LOGIC;
-			cos 					: out float (COS_EXP downto -COS_FPF);
-			sin_valid 			: out STD_LOGIC;
-			sin 					: out float (SIN_EXP downto -SIN_FPF);
-			data_out_valid		: out STD_LOGIC;
-			data_out				: out float (DATA_EXP downto -DATA_FPF));
+			cos_valid 				: out STD_LOGIC;
+			cos 					: out STD_LOGIC_VECTOR (WIDTH_COS-1 downto 0);
+			sin_valid 				: out STD_LOGIC;
+			sin 					: out STD_LOGIC_VECTOR (WIDTH_SIN-1 downto 0);
+			data_out_valid				: out STD_LOGIC;
+			data_out				: out STD_LOGIC_VECTOR (WIDTH_FLOAT-1 downto 0));
 end float_real_core;
 
-architecture Structure of float_real_core is
+architecture Behavioral of float_real_core is
 
-signal data_in_buff, data_out_buff : float(DATA_EXP downto -DATA_FPF);
+signal data_in_buff : ;
+signal data_out_buff : ;
 
 begin
 
@@ -73,16 +74,17 @@ process(clk, rst)
 begin
 	if rst = '1' then
 		data_in_buff	<= (others => '0');
-		data_out			<= (others => '0');
+		data_out	<= (others => '0');
 	elsif rising_edge(clk) then
 		if ce = '1' then
 			if data_in_valid = '1' then
-				data_in_buff <= data_in;
+				data_in_buff <= to_float(data_in);
 			end if;
 			data_out <= to_slv(data_out_buff);
 		end if;
 	end if;
 end process;
 
-end Structure;
+
+end Behavioral;
 

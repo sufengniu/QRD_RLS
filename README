@@ -8,4 +8,7 @@ In the Matlab folder:
 	err_check.m: call data_acq.m to check the error margin between embedded platform and Matlab
 
 In the processor folder:
-	makefile: support Zynq and x86 compiler, Zynq platform library link is required
+	makefile: support Zynq and x86 compiler, Zynq library link is required
+
+In the FPGA folder:
+	the RTL code support both floating point and fixed point. Also, the generic can configure the hardware to be complex and real number computation. 

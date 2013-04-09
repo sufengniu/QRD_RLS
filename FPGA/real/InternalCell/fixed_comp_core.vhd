@@ -29,7 +29,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FIXED_COMP_INSC is
+entity fixed_comp_core is
     Generic (	
 			mode					: string := "streaming";		-- streaming/burst: streaming data need more area and power.
 																			-- consumption
@@ -40,12 +40,12 @@ entity FIXED_COMP_INSC is
     Port ( clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            ce : in  STD_LOGIC);
-end FIXED_COMP_INSC;
+end Ffixed_comp_core;
 
-architecture Behavioral of FIXED_COMP_INSC is
+architecture Structure of fixed_comp_core is
 
 begin
 
 
-end Behavioral;
+end Structure;
 

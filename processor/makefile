@@ -1,6 +1,6 @@
 # Makefile for QR Decomposition
 # Engineer: Sufeng Niu
-# company: ECASP
+# Company: ECASP
 
 ZYNQ_PATH = /tools/Xilinx/14.4/ISE_DS/EDK/gnu/arm/lin/bin/
 BUILDROOT_PATH=$(HOME)/ZynqLinux/buildroot/
@@ -33,9 +33,9 @@ givens_rotation_zynq.o: givens.c givens.h
 main_zynq.o: main.c givens.h
 	$(CC_ZYNQ) $(CFLAGS_ZYNQ) -c main.c -o main_zynq.o 
 
-tar: main.c givens.c givens.h makefile
-	tar czvf QRD.tar main.c givens.c givens.h makefile
+tar:
+	tar czvf QRD.tar *.h *.c makefile
 
 clean: 
-	rm -f *.o qrd_cpu qrd_zynq givens_rotation_zynq givens_rotation_cpu res_vector.dat
+	rm -f *.o qrd_cpu qrd_zynq givens_rotation_zynq givens_rotation_cpu res_vector.dat *.tar
 

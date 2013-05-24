@@ -36,7 +36,6 @@ use IEEE_PROPOSED.float_pkg.all;
 
 library work;
 use work.QRD_RLS_pkg.all;
-use work.fixed_real_core;
 
 entity BoundaryCell is
 	Generic ( 

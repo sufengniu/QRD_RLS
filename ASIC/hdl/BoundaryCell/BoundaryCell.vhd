@@ -68,10 +68,12 @@ architecture Behavioral of BoundaryCell is
 
 begin
 
-BOUND_GEN: if (data_form = "fixed") and (data_type = "real") generate	
-		data_out.im <= (others => '0');
+FIXED_REAL_GEN: if (data_form = "fixed") and (data_type = "real") generate	
+		data_out.im_fixed <= (others => '0');
+		data_out.re_float <= (others => '0');
+		data_out.im_float <= (others => '0');
 		FIXED_REAL_INSC: entity work.fixed_real_core
-		generic map (	
+		generic map (
 				mode			=> mode,
 				oriented		=> oriented )
 		port map(	
@@ -80,7 +82,7 @@ BOUND_GEN: if (data_form = "fixed") and (data_type = "real") generate
 				ce			=> ce,
 			 
 				data_in_rdy		=> data_in_rdy,
-				data_in			=> data_in.re,
+				data_in			=> data_in.re_fixed,
 				data_in_valid		=> data_in_valid,
 			 
 				cos_valid		=> cos_valid,
@@ -88,9 +90,13 @@ BOUND_GEN: if (data_form = "fixed") and (data_type = "real") generate
 				sin_valid		=> sin_valid,
 				sin			=> sin,
 				data_out_valid		=> data_out_valid,
-				data_out		=> data_out.re );
-elsif (data_form = "float") and (data_type = "real") generate
-		data_out.im <= (others => '0');
+				data_out		=> data_out.re_fixed );
+end generate FIXED_REAL_GEN;
+
+FLOAT_REAL_GEN: if (data_form = "float") and (data_type = "real") generate
+		data_out.im_fixed <= (others => '0');
+		data_out.re_fixed <= (others => '0');
+		data_out.im_float <= (others => '0');
 		FLOAT_REAL_INSC: entity work.float_real_core
 		generic map (	
 				mode			=> mode,
@@ -101,7 +107,7 @@ elsif (data_form = "float") and (data_type = "real") generate
 				ce			=> ce,
 			 
 				data_in_rdy		=> data_in_rdy,
-				data_in			=> data_in.re,
+				data_in			=> data_in.re_float,
 				data_in_valid		=> data_in_valid,
 			 
 				cos_valid		=> cos_valid,
@@ -109,9 +115,13 @@ elsif (data_form = "float") and (data_type = "real") generate
 				sin_valid		=> sin_valid,
 				sin			=> sin,
 				data_out_valid		=> data_out_valid,
-				data_out		=> data_out.re );
+				data_out		=> data_out.re_float );
+end generate FLOAT_REAL_GEN;
 
-elsif (data_form = "fixed") and (data_type = "complex") generate
+FIXED_COMP_GEN: if (data_form = "fixed") and (data_type = "complex") generate
+		data_out.re_float <= (others => '0');
+		data_out.im_float <= (others => '0');		
+
 		FIXED_COMP_INSC: entity work.fixed_comp_core
 		generic map (	
 				mode			=> mode,
@@ -122,17 +132,23 @@ elsif (data_form = "fixed") and (data_type = "complex") generate
 				ce			=> ce,
 			 
 				data_in_rdy		=> data_in_rdy,
-				data_in			=> data_in,
+				data_in_re		=> data_in.re_fixed,
+				data_in_im		=> data_in.im_fixed,
 				data_in_valid		=> data_in_valid,
 			 
 				cos_valid		=> cos_valid,
 				cos			=> cos,
 				sin_valid		=> sin_valid,
 				sin			=> sin,
-				data_out_valid		=> data_out_valid,
-				data_out		=> data_out );
 
-elsif (data_form = "float") and (data_type = "complex") generate
+				data_out_valid		=> data_out_valid,
+				data_out_re		=> data_out.re_fixed,
+				data_out_im		=> data_out.im_fixed );
+end generate FIXED_COMP_GEN;
+
+FLOAT_COMP_GEN: if (data_form = "float") and (data_type = "complex") generate
+		data_out.re_fixed <= (others => '0');
+		data_out.im_fixed <= (others => '0');		
 
 		FLOAT_COMP_INSC: entity work.float_comp_core
 		generic map (	
@@ -144,7 +160,8 @@ elsif (data_form = "float") and (data_type = "complex") generate
 				ce			=> ce,
 			 
 				data_in_rdy		=> data_in_rdy,
-				data_in			=> data_in,
+				data_in_re		=> data_in.re_float,
+				data_in_im		=> data_in.im_float,
 				data_in_valid		=> data_in_valid,
 			 
 				cos_valid		=> cos_valid,
@@ -152,9 +169,9 @@ elsif (data_form = "float") and (data_type = "complex") generate
 				sin_valid		=> sin_valid,
 				sin			=> sin,
 				data_out_valid		=> data_out_valid,
-				data_out		=> data_out );
-	--end;
-end generate BOUND_GEN;
+				data_out_re		=> data_out.re_float,
+				data_out_im		=> data_out.im_float );
+end generate FLOAT_COMP_GEN;
 
 end Behavioral;
 

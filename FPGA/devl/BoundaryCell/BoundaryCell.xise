@@ -15,37 +15,37 @@
   <version xil_pn:ise_version="14.5" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/testbench.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/testbench.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="1"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="1"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="1"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/BoundaryCell.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/BoundaryCell.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="2"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/fixed_comp_core.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/fixed_comp_core.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/fixed_real_core.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/fixed_real_core.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="4"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/float_comp_core.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/float_comp_core.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/float_real_core.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/float_real_core.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="6"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/QRD_RLS_pkg.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../hdl/BoundaryCell/QRD_RLS_pkg.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
     </file>
-    <file xil_pn:name="../../hdl/real/BoundaryCell/QRD_RLS.ucf" xil_pn:type="FILE_UCF">
+    <file xil_pn:name="../../hdl/BoundaryCell/QRD_RLS.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
     </file>
   </files>
@@ -168,7 +168,7 @@
     <property xil_pn:name="Ignore User Timing Constraints Par" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Ignore Version Check" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Implementation Top" xil_pn:value="Architecture|BoundaryCell|Behavioral" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Implementation Top File" xil_pn:value="../../hdl/real/BoundaryCell/BoundaryCell.vhd" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Implementation Top File" xil_pn:value="../../hdl/BoundaryCell/BoundaryCell.vhd" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="/BoundaryCell" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Include 'uselib Directive in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include SIMPRIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>

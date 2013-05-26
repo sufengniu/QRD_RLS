@@ -35,10 +35,10 @@ entity float_comp_core is
            ce : in  STD_LOGIC);
 end float_comp_core;
 
-architecture Behavioral of float_comp_core is
+architecture Structure of float_comp_core is
 
 begin
 
 
-end Behavioral;
+end Structure;
 

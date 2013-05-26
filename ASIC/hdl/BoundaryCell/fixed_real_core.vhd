@@ -52,6 +52,7 @@ entity fixed_real_core is
 			cos 					: out sfixed (INT_COS downto -FRA_COS);
 			sin_valid 				: out STD_LOGIC;
 			sin 					: out sfixed (INT_SIN downto -FRA_SIN);
+
 			data_out_valid				: out STD_LOGIC;
 			data_out				: out sfixed (DATA_INT downto -DATA_FRA));
 end fixed_real_core;

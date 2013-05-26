@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2013-05-23T22:54:19</DateModified>
+  <DateModified>2013-05-26T13:39:23</DateModified>
   <ModuleName>BoundaryCell</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/sniu/lab/QRD_RLS/FPGA/devl/BoundaryCell/iseconfig/BoundaryCell.xreport</SavedFilePath>
